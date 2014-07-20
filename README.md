@@ -44,11 +44,11 @@ Add the following in your console config:
 To create migration in common directory `@app/migration` use follow command.
 
 ```bash
-    php yii migrate/create comment_for_migration
+$ php yii migrate/create comment_for_migration
 ```
 
 To create migration in directory of the module `@app/modules/module_name/migration` use follow command.
 
 ```bash
-    php yii migrate/create comment_for_migration module_name
+$ php yii migrate/create comment_for_migration module_name
 ```
