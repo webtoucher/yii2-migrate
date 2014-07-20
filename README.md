@@ -1,6 +1,8 @@
 yii2-migrate
 ============
 
+Console Migration Command with multiple paths/aliases support.
+
 ## Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
