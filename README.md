@@ -29,7 +29,7 @@ Add the following in your console config:
         'controllerMap' => [
             'migrate' => [
                 'class' => 'webtoucher\migrate\controllers\MigrateController',
-                // additional aliases of migration directories
+                // alias of modules directory
                 // 'modulesPath' => '@app/modules',
                 // additional aliases of migration directories
                 // 'migrationLookup' => [],
@@ -37,4 +37,18 @@ Add the following in your console config:
         ],
         ...
     ];
+```
+
+## Usage
+
+To create migration in common directory `@app/migration` use follow command.
+
+```bash
+    php yii migrate/create comment_for_migration
+```
+
+To create migration in directory of the module `@app/modules/module_name/migration` use follow command.
+
+```bash
+    php yii migrate/create comment_for_migration module_name
 ```
