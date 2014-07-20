@@ -22,6 +22,11 @@ class MigrateController extends \yii\console\controllers\MigrateController
     public $migrationLookup = [];
 
     /**
+     * @var array Additional aliases of migration directories.
+     */
+    public $modulesPath = '@app/modules';
+
+    /**
      * @inheritdoc
      */
     public function options($actionId)
@@ -76,6 +81,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
             }
             echo "\nMigrated up successfully.\n";
         }
+        return self::EXIT_CODE_NORMAL;
     }
 
     /**
@@ -117,6 +123,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
             }
             echo "\nMigrated down successfully.\n";
         }
+        return self::EXIT_CODE_NORMAL;
     }
 
     /**
@@ -165,6 +172,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
             }
             echo "\nMigration redone successfully.\n";
         }
+        return self::EXIT_CODE_NORMAL;
     }
 
     /**
@@ -469,15 +477,14 @@ class MigrateController extends \yii\console\controllers\MigrateController
             $applied[substr($version, 1, 13)] = true;
         }
 
-        $this->migrationLookup = [];
-        $moduleMigrations = FileHelper::findFiles(Yii::getAlias('@app/modules'), [
+        $moduleMigrations = FileHelper::findFiles(Yii::getAlias($this->modulesPath), [
             'only' => ['*/migrations/*php']
         ]);
         array_walk($moduleMigrations, function(&$value) {
             $value = dirname($value);
         });
-        $this->migrationLookup = array_unique($moduleMigrations);
-        $directories = ArrayHelper::merge([$this->migrationPath], $this->migrationLookup);
+        $moduleMigrations = array_unique($moduleMigrations);
+        $directories = ArrayHelper::merge([$this->migrationPath], $moduleMigrations, $this->migrationLookup);
 
         $migrations = [];
         foreach ($directories as $alias) {
