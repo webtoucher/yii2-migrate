@@ -7,8 +7,6 @@ Console Migration Command with multiple paths/aliases support.
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-> Note: You must set the `minimum-stability` to `dev` in the **composer.json** file in your application root folder before installation of this extension.
-
 Either run
 
 ```
