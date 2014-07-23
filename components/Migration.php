@@ -1,8 +1,19 @@
 <?php
+/**
+ * @link https://github.com/webtoucher/yii2-migrate
+ * @copyright Copyright (c) 2014 webtoucher
+ * @license https://github.com/webtoucher/yii2-migrate/blob/master/LICENSE.md
+ */
 
 namespace webtoucher\migrate\components;
 
 
+/**
+ * Migration class
+ *
+ * @author Alexey Kuznetsov <mirakuru@webtoucher.ru>
+ * @since 2.0
+ */
 class Migration extends \yii\db\Migration
 {
     const NOT_NULL = ' NOT NULL';
