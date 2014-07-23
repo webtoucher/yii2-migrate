@@ -24,21 +24,21 @@ to the ```require``` section of your `composer.json` file.
 Add the following in your console config:
 
 ```php
-    return [
+return [
+    ...
+    'controllerMap' => [
         ...
-        'controllerMap' => [
-            ...
-            'migrate' => [
-                'class' => 'webtoucher\migrate\controllers\MigrateController',
-                // alias of modules directory
-                // 'modulesPath' => '@app/modules',
-                // additional aliases of migration directories
-                // 'migrationLookup' => [],
-            ],
-            ...
+        'migrate' => [
+            'class' => 'webtoucher\migrate\controllers\MigrateController',
+            // alias of modules directory
+            // 'modulesPath' => '@app/modules',
+            // additional aliases of migration directories
+            // 'migrationLookup' => [],
         ],
         ...
-    ];
+    ],
+    ...
+];
 ```
 
 ## Usage
