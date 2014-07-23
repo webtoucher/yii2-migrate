@@ -27,6 +27,7 @@ Add the following in your console config:
     return [
         ...
         'controllerMap' => [
+            ...
             'migrate' => [
                 'class' => 'webtoucher\migrate\controllers\MigrateController',
                 // alias of modules directory
@@ -34,6 +35,7 @@ Add the following in your console config:
                 // additional aliases of migration directories
                 // 'migrationLookup' => [],
             ],
+            ...
         ],
         ...
     ];
