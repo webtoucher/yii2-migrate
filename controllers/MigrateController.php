@@ -14,7 +14,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
     /**
      * @inheritdoc
      */
-    public $templateFile = '@vendor/webtoucher/migrate/views/migration.php';
+    public $templateFile = '@vendor/webtoucher/yii2-migrate/views/migration.php';
 
     /**
      * @var array Additional aliases of migration directories.
