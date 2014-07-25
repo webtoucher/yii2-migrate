@@ -7,6 +7,8 @@
 
 namespace webtoucher\migrate\components;
 
+use yii\db\Expression;
+
 
 /**
  * Migration class
@@ -20,7 +22,7 @@ class Migration extends \yii\db\Migration
 
     // default values for fields
     const DEFAULT_FALSE     = ' DEFAULT FALSE';
-    const DEFAULT_TRUE      = ' DEFAULT FALSE';
+    const DEFAULT_TRUE      = ' DEFAULT TRUE';
     const DEFAULT_ZERO      = ' DEFAULT 0';
     const DEFAULT_TIMESTAMP = ' DEFAULT now()';
 
@@ -32,7 +34,19 @@ class Migration extends \yii\db\Migration
     const SET_NULL    = 'SET NULL';
 
     /**
-     * Adds comment for a table
+     * Returns custom default value.
+     *
+     * @param integer|string|Expression|null $value
+     * @return string
+     */
+    public function defaultValue($value)
+    {
+        $value = $this->db->quoteValue($value);
+        return " DEFAULT $value";
+    }
+
+    /**
+     * Adds comment for a table.
      *
      * @param string $table
      * @param string $comment
@@ -47,7 +61,7 @@ class Migration extends \yii\db\Migration
     }
 
     /**
-     * Adds comment for a table's column
+     * Adds comment for a table's column.
      *
      * @param string $table
      * @param string $column
