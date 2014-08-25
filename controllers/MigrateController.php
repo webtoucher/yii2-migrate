@@ -7,6 +7,8 @@ use yii\console\Exception;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use yii\helpers\Inflector;
+use yii\helpers\StringHelper;
 
 
 class MigrateController extends \yii\console\controllers\MigrateController
@@ -485,6 +487,14 @@ class MigrateController extends \yii\console\controllers\MigrateController
         });
         $moduleMigrations = array_unique($moduleMigrations);
         $directories = ArrayHelper::merge([$this->migrationPath], $moduleMigrations, $this->migrationLookup);
+        array_walk($directories, function(&$directory) {
+            $appPath = Yii::getAlias('@app');
+            // For correct detection on Windows
+            $vendorPath = StringHelper::dirname($appPath) . DIRECTORY_SEPARATOR . 'vendor';
+            $directory = str_replace($appPath, '@app', $directory);
+            $directory = str_replace($vendorPath, '@vendor', $directory);
+            $directory = FileHelper::normalizePath($directory, '/');
+        });
 
         $migrations = [];
         foreach ($directories as $alias) {
@@ -494,11 +504,9 @@ class MigrateController extends \yii\console\controllers\MigrateController
                 if ($file === '.' || $file === '..') {
                     continue;
                 }
-                $path = $dir . DIRECTORY_SEPARATOR . $file;
-                if (preg_match('/^(m(\d{6}_\d{6})_.*?)\.php$/', $file, $matches) && is_file(
-                        $path
-                    ) && !isset($applied[$matches[2]])
-                ) {
+                $path = "$dir/$file";
+                if (preg_match('/^(m(\d{6}_\d{6})_.*?)\.php$/', $file, $matches) && is_file($path)
+                        && !isset($applied[$matches[2]])) {
                     $migrations[$matches[1]] = $alias;
                 }
             }
