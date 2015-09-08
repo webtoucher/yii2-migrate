@@ -280,7 +280,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
     public function actionCreate($name, $module = null)
     {
         if (!empty($module)) {
-            $migrationPath = "@app/modules/$module";
+            $migrationPath = $this->migrationPath . DIRECTORY_SEPARATOR . $module;
             $path = Yii::getAlias($migrationPath);
             if (!is_dir($path)) {
                 throw new Exception("Module '$module' is not exists");
